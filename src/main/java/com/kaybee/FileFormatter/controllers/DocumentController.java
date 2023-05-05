@@ -16,12 +16,7 @@ import java.io.IOException;
 public class DocumentController {
 
     private static final Logger log = LogManager.getLogger(DocumentController.class);
-    @PostMapping("/download")
-    public ResponseEntity<String> downloadFile(String path)
-            throws IOException {
 
-        return ResponseEntity.ok().body("File downloaded successfully: " + path);
-    }
     @PostMapping("/upload")
     public ResponseEntity<String> uploadFile(@RequestBody MultipartFile file)
             throws IOException {

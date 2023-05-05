@@ -16,8 +16,15 @@ import java.io.IOException;
 public class DocumentController {
 
     private static final Logger log = LogManager.getLogger(DocumentController.class);
+    @PostMapping("/download")
+    public ResponseEntity<String> downloadFile(String path)
+            throws IOException {
+
+        return ResponseEntity.ok().body("File downloaded successfully: " + path);
+    }
     @PostMapping("/upload")
-    public ResponseEntity<String> uploadFile(@RequestBody MultipartFile file) throws IOException {
+    public ResponseEntity<String> uploadFile(@RequestBody MultipartFile file)
+            throws IOException {
 
         // Check if the file is empty
         if (file.isEmpty()) {
@@ -42,3 +49,5 @@ public class DocumentController {
         return ResponseEntity.ok().body("File uploaded successfully: " + fileName);
     }
 }
+
+

@@ -21,7 +21,9 @@ public class XmlFormatterService {
     public XmlFormatterService() {
     }
 
-    public static void formatXmlFile(File input, File output) throws Exception {
+    public static void formatXmlFile(String inputPath, String outputPath) throws Exception {
+        File input = new File(inputPath);
+        File output = new File(outputPath);
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
         Document document = builder.parse(new InputSource(input.getAbsolutePath()));

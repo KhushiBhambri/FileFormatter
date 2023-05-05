@@ -2,6 +2,7 @@
 package com.kaybee.FileFormatter.controllers;
 
 import com.kaybee.FileFormatter.constants.FormatterConstants;
+import com.kaybee.FileFormatter.services.DocumentService;
 import com.kaybee.FileFormatter.services.XmlFormatterService;
 import java.io.File;
 import javax.servlet.http.HttpServletResponse;
@@ -22,12 +23,10 @@ public class XmlFormatterController {
 
     @PostMapping({"/xmlFile"})
     public ResponseEntity<?> FormatJsonFile(HttpServletResponse HttpResponse) throws Exception {
-        String inputFileName = FormatterConstants.INPUT_XML_FILE;
-        String OutputFileName = FormatterConstants.OUTPUT_XML_FILE;
-        File input = new File(inputFileName);
-        File output = new File(OutputFileName);
-        XmlFormatterService.formatXmlFile(input, output);
-        return null;
+        String inputFilePath = FormatterConstants.INPUT_XML_FILE;
+        String OutputFilePath = FormatterConstants.OUTPUT_XML_FILE;
+        XmlFormatterService.formatXmlFile(inputFilePath, OutputFilePath);
+        return DocumentService.downloadFile(OutputFilePath);
     }
 
     @PostMapping({"/xmlString"})

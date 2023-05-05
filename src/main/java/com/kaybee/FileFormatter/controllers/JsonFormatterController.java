@@ -1,5 +1,6 @@
 package com.kaybee.FileFormatter.controllers;
 
+import com.kaybee.FileFormatter.constants.FormatterConstants;
 import com.kaybee.FileFormatter.services.JsonFormatterService;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
@@ -18,8 +19,8 @@ public class JsonFormatterController {
 
     @PostMapping({"/jsonFile"})
     public ResponseEntity<?> FormatJsonFile(HttpServletResponse HttpResponse) throws Exception {
-        String inputFileName = "src/main/resources/input.json";
-        String OutputFileName = "src/main/resources/output.json";
+        String inputFileName = FormatterConstants.INPUT_JSON_FILE;
+        String OutputFileName = FormatterConstants.OUTPUT_JSON_FILE;
         JsonFormatterService.formatJsonFile(inputFileName, OutputFileName);
         return null;
     }

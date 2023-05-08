@@ -1,4 +1,4 @@
-import com.fasterxml.jackson.databind.JsonNode;
+[5:11 pm, 08/05/2023] RishiRaj LNMIIT: import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
@@ -20,6 +20,48 @@ public class JsonAttributeSearch {
             System.out.println("Attribute value: " + attributeNode.asText());
         } else {
             System.out.println("Attribute not found.");
+        }
+    }
+}
+[5:23 pm, 08/05/2023] RishiRaj LNMIIT: import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
+import java.io.File;
+import java.util.Iterator;
+
+@SpringBootApplication
+public class JsonAttributeSearchApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(JsonAttributeSearchApplication.class, args);
+    }
+}
+
+@Component
+class JsonAttributeSearchRunner implements CommandLineRunner {
+
+    @Override
+    public void run(String... args) throws Exception {
+        // create object mapper to read JSON file
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        // read JSON file as a tree structure
+        JsonNode rootNode = objectMapper.readTree(new File("path/to/json/file.json"));
+
+        // iterate over all attributes in the JSON tree
+        Iterator<String> attributeNames = rootNode.fieldNames();
+        while (attributeNames.hasNext()) {
+            String attributeName = attributeNames.next();
+            JsonNode attributeNode = rootNode.get(attributeName);
+
+            // print the attribute value if found
+            if (attributeNode != null) {
+                System.out.println("Attribute name: " + attributeName);
+                System.out.println("Attribute value: " + attributeNode.asText());
+            }
         }
     }
 }
